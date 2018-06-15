@@ -16,10 +16,9 @@ class WarmUpSuite extends FreeSpec with Matchers {
 
   "MaximumPairwiseProduct" - {
     import MaximumPairwiseProduct.calcMaximumPairwiseProduct
-    import scala.util.Random
 
     "should calculate the product of the largest and the second largest element in a list" in {
-      val lst1: List[Int] = List(4, 5, 1)
+      val lst1: List[Int] = List(4, 5)
       val lst2: List[Int] = List(1, 2, 10, 3, 10, 9)
 
       calcMaximumPairwiseProduct(lst1) shouldEqual 20
