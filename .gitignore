@@ -2,3 +2,7 @@
 *target/
 *resources/
 *project/
+.Rproj.user
+*.Rhistory
+*.Rproj
+*.RData
