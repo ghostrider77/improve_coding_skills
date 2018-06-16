@@ -1,8 +1,11 @@
 package introduction
 
+import scala.annotation.tailrec
+
 object LeastCommonMultiple {
   private def convertToIntList(line: String): List[Int] = line.split(" ").map(_.toInt).toList
 
+  @tailrec
   private def calcGCD(a: Int, b: Int): Int = if (b == 0) a else calcGCD(b, a % b)
 
   def calcLCM(a: Int, b: Int): Long = {

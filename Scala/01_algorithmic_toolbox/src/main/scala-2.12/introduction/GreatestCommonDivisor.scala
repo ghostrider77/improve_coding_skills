@@ -1,8 +1,11 @@
 package introduction
 
+import scala.annotation.tailrec
+
 object GreatestCommonDivisor {
   private def convertToIntList(line: String): List[Int] = line.split(" ").map(_.toInt).toList
 
+  @tailrec
   def calcGCD(a: Int, b: Int): Int = if (b == 0) a else calcGCD(b, a % b)
 
   def main(args: Array[String]): Unit = {
