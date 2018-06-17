@@ -27,6 +27,7 @@ Main <- function() {
     CheckPrerequisites(pkgs)
     conn <- file("stdin", "r")
     lines <- readLines(conn, n = 2)
+    close(conn)
     lst <- as.integer(unlist(strsplit(lines[2], " ")))
     result <- CalcMaximumPairwiseProduct(lst)
     cat(paste(result), fill = TRUE)
