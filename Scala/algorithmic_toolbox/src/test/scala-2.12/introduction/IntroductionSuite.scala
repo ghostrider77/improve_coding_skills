@@ -50,4 +50,37 @@ class IntroductionSuite extends FreeSpec with Matchers {
     }
   }
 
+  "HugeFibonacciModulo" - {
+    import HugeFibonacciModulo.calcHugeFibonacciModulo
+
+    "should calculate a huge Fibonacci number modulo m" in {
+      calcHugeFibonacciModulo(1, 239) shouldEqual 1
+      calcHugeFibonacciModulo(14, 3) shouldEqual 2
+      calcHugeFibonacciModulo(239, 1000) shouldEqual 161
+      calcHugeFibonacciModulo(2816213588L, 30524) shouldEqual 10249
+    }
+  }
+
+  "SumOfFibonacciNumbers" - {
+    import SumOfFibonacciNumbers.calcLastDigitOfTheSumOfFibonacciNumbers
+
+    "should calculate the last digit of the sum of the Fibonacci numbers up to n: F_0 + F_1 + ... + F_n" in {
+      calcLastDigitOfTheSumOfFibonacciNumbers(0) shouldEqual 0
+      calcLastDigitOfTheSumOfFibonacciNumbers(1) shouldEqual 1
+      calcLastDigitOfTheSumOfFibonacciNumbers(3) shouldEqual 4
+      calcLastDigitOfTheSumOfFibonacciNumbers(13) shouldEqual 9
+      calcLastDigitOfTheSumOfFibonacciNumbers(100) shouldEqual 5
+    }
+  }
+
+  "PartialSumOfFibonacciNumbers" - {
+    import PartialSumOfFibonacciNumbers.calcLastDigitOfPartialSum
+
+    "should calculate the last digit of the partial sum of the Fibonacci numbers: F_m + F_{m+1} + ... + F_n" in {
+      calcLastDigitOfPartialSum(3, 7) shouldEqual 1
+      calcLastDigitOfPartialSum(10, 10) shouldEqual 5
+      calcLastDigitOfPartialSum(10, 200) shouldEqual 2
+    }
+  }
+
 }
