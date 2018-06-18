@@ -1,4 +1,4 @@
-
+#!/usr/bin/env Rscript
 CheckPrerequisites <- function(pkgs) {
     for (pkg in pkgs) {
         if (!suppressMessages(require(pkg, character.only = TRUE, quietly = TRUE))) {

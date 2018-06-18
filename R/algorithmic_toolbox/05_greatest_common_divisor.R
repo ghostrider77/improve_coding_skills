@@ -1,4 +1,4 @@
-
+#!/usr/bin/env Rscript
 CalcGCD <- function(a, b) {
     while (b > 0) {
         rem <- a %% b

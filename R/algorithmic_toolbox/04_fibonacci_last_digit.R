@@ -1,4 +1,4 @@
-
+#!/usr/bin/env Rscript
 modulus <- 10
 
 FibonacciLastDigit <- function(n) {

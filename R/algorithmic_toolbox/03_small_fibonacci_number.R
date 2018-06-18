@@ -1,4 +1,4 @@
-
+#!/usr/bin/env Rscript
 Fibonacci <- function(n) {
     k <- 1
     a <- 0

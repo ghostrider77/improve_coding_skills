@@ -1,4 +1,4 @@
-
+#!/usr/bin/env Rscript
 AddTwoNumbers <- function(a, b) {
     a + b
 }
