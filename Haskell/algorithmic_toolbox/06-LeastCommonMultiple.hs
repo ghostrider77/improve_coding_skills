@@ -17,4 +17,4 @@ main = do
     line <- getLine
     let [a, b] = convertToIntList line
     let result = calcLCM a b
-    putStrLn $ show result
+    print result

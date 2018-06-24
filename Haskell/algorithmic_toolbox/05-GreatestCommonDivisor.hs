@@ -12,4 +12,4 @@ main = do
     line <- getLine
     let [a, b] = convertToIntList line
     let result = calcGCD a b
-    putStrLn $ show result
+    print result

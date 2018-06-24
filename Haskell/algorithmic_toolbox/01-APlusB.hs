@@ -5,4 +5,4 @@ main :: IO()
 main = do
     x <- readLn
     y <- readLn
-    putStrLn $ show $ addTwoNumbers x y
+    print $ addTwoNumbers x y

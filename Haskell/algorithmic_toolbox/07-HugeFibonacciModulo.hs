@@ -24,4 +24,4 @@ main :: IO()
 main = do
     line <- getLine
     let [n, modulus] = convertToIntegerList line
-    putStrLn $ show $ calcHugeFibonacciModulo n (fromIntegral modulus)
+    print $ calcHugeFibonacciModulo n (fromIntegral modulus)

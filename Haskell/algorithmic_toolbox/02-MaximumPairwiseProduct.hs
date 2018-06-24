@@ -22,4 +22,4 @@ main = do
     line <- getLine
     let list = convertToIntList line
     let result = calcMaximumPairwiseProduct list
-    putStrLn $ show result
+    print result

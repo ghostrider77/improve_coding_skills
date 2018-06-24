@@ -24,4 +24,4 @@ main :: IO()
 main = do
     line <- getLine
     let n = read line
-    putStrLn $ show $ calcLastDigitOfTheSumOfFibonacciNumbers n
+    print $ calcLastDigitOfTheSumOfFibonacciNumbers n

@@ -8,4 +8,4 @@ calcFibonacciLastDigit n = fst $ foldr (\_ (a, b) -> (b, (a + b) `mod` modulus))
 main :: IO()
 main = do
     n <- readLn
-    putStrLn $ show $ calcFibonacciLastDigit n
+    print $ calcFibonacciLastDigit n

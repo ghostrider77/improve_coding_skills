@@ -31,4 +31,4 @@ main :: IO()
 main = do
     line <- getLine
     let [m, n] = convertToIntegerList line
-    putStrLn $ show $ calcLastDigitOfPartialSum m n
+    print $ calcLastDigitOfPartialSum m n
