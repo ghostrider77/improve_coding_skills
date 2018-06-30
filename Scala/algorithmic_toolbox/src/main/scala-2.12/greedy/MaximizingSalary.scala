@@ -10,6 +10,7 @@ object MaximizingSalary {
 
   def main(args: Array[String]): Unit = {
     val reader: Iterator[String] = scala.io.Source.stdin.getLines()
+    val _: Int = reader.next().toInt
     val numberStrings: List[String] = reader.next().split(" ").toList
     val result: String = assembleLargestNumberFromPieces(numberStrings)
     println(result)

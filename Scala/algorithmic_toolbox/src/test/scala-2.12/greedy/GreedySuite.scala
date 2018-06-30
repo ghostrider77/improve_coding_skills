@@ -94,7 +94,7 @@ class GreedySuite extends FreeSpec with Matchers with Inspectors {
 
       "test case 3" in {
         val n: Int = 10
-        val segments: List[Segment] = (for { ix <- 1 to n } yield Segment(1, ix)).toList
+        val segments: List[Segment] = (for { ix <- 1 to n } yield Segment(0, ix)).toList
         val points: List[Int] = calcMinimumNumberOfPointsCoveringSegments(segments)
         points.length shouldEqual 1
         forAll(segments) { case Segment(x, y) =>
