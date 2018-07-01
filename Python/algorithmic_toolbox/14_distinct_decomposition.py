@@ -3,14 +3,14 @@ import sys
 
 def get_decomposition_to_maximal_number_of_distinct_elems(n):
     summands = []
-    number, smallest_summand = n, 1
-    while number > 0:
-        if number > 2 * smallest_summand:
+    smallest_summand = 1
+    while n > 0:
+        if n > 2 * smallest_summand:
             elem = smallest_summand
         else:
-            elem = number
+            elem = n
         summands.append(elem)
-        number -= elem
+        n -= elem
         smallest_summand += 1
     return summands
 
