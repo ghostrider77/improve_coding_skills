@@ -1,19 +1,25 @@
-import Data.List (intercalate, sortBy)
+import Data.List (intercalate, sort)
+
+data Number = Number String
+
+instance Eq Number where
+    (Number n1) == (Number n2) = n1 ++ n2 == n2 ++ n1
+
+instance Ord Number where
+    (Number n1) <= (Number n2) = n1 ++ n2 <= n2 ++ n1
+
+instance Show Number where
+    show (Number n) = n
 
 
-assembleLargestNumberFromPieces :: [String] -> [String]
-assembleLargestNumberFromPieces numberStrings = sortBy (flip order) numberStrings
-    where
-        order :: String -> String -> Ordering
-        order n1 n2
-            | n1 ++ n2 < n2 ++ n1 = LT
-            | n1 ++ n2 > n2 ++ n1 = GT
-            | otherwise = EQ
+assembleLargestNumberFromPieces :: [Number] -> [String]
+assembleLargestNumberFromPieces numberStrings = map show $ reverse $ sort numberStrings
 
 
 main :: IO()
 main = do
     _ <- getLine
     line <- getLine
-    let result = assembleLargestNumberFromPieces $ words line
+    let result = assembleLargestNumberFromPieces $ map Number $ words line
+    print result
     putStrLn $ intercalate "" result
