@@ -1,4 +1,5 @@
-import Data.List (intercalate, sort)
+import Data.List (intercalate, sortBy)
+import Data.Ord (Down(..), comparing)
 
 data Number = Number String
 
@@ -13,7 +14,7 @@ instance Show Number where
 
 
 assembleLargestNumberFromPieces :: [Number] -> [String]
-assembleLargestNumberFromPieces numberStrings = map show $ reverse $ sort numberStrings
+assembleLargestNumberFromPieces numberStrings = map show $ sortBy (comparing Down) numberStrings
 
 
 main :: IO()
@@ -21,5 +22,4 @@ main = do
     _ <- getLine
     line <- getLine
     let result = assembleLargestNumberFromPieces $ map Number $ words line
-    print result
     putStrLn $ intercalate "" result
