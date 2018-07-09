@@ -6,7 +6,7 @@ object MajorityElement {
 
   def hasMajorityElem(lst: List[Int], n: Int): Boolean = {
     val counts: Map[Int, Int] = lst.groupBy(identity).mapValues(_.length)
-    counts.exists{ case (_, count) => count > n / 2 }
+    counts.valuesIterator.exists(_ > n / 2)
   }
 
   def main(args: Array[String]): Unit = {
