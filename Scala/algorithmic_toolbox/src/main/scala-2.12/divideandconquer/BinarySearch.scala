@@ -3,11 +3,11 @@ package divideandconquer
 import scala.collection.Searching._
 
 object BinarySearch {
-  private def convertToIntList(line: String): List[Int] = line.split(" ").map(_.toInt).toList
+  private def convertToIntVector(line: String): Vector[Int] = line.split(" ").map(_.toInt).toVector
 
-  def findElems(lst: List[Int], length: Int, queries: List[Int]): List[Int] = {
+  def findElems(vector: Vector[Int], length: Int, queries: Vector[Int]): Vector[Int] = {
     for { elem <- queries } yield {
-      lst.search(elem) match {
+      vector.search(elem) match {
         case Found(ix) => ix
         case _ => -1
       }
@@ -16,9 +16,9 @@ object BinarySearch {
 
   def main(args: Array[String]): Unit = {
     val reader: Iterator[String] = scala.io.Source.stdin.getLines()
-    val inputList: List[Int] = convertToIntList(reader.next())
-    val queryList: List[Int] = convertToIntList(reader.next())
-    val result: List[Int] = findElems(inputList.tail, inputList.head, queryList.tail)
+    val inputVector: Vector[Int] = convertToIntVector(reader.next())
+    val queryVector: Vector[Int] = convertToIntVector(reader.next())
+    val result: Vector[Int] = findElems(inputVector.tail, inputVector.head, queryVector.tail)
     println(result.mkString(" "))
   }
 }
