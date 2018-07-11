@@ -24,4 +24,15 @@ class DivideAndConquerSuite extends FreeSpec with Matchers {
       hasMajorityElem(List(1, 2, 3, 1), 4) shouldBe false
     }
   }
+
+  "QuickSort" - {
+    import QuickSort.Sorting
+
+    "should sort an array" in {
+      val lst: Array[Int] = Array(2, 3, 9, 2, 2, 10, 11, 5)
+      val sorting = new Sorting(lst, Some(lst.length))
+      sorting.quickSort()
+      sorting.array shouldEqual Array(2, 2, 2, 3, 5, 9, 10, 11)
+    }
+  }
 }
