@@ -35,4 +35,18 @@ class DivideAndConquerSuite extends FreeSpec with Matchers {
       sorting.array shouldEqual Array(2, 2, 2, 3, 5, 9, 10, 11)
     }
   }
+
+  "CountInversions" - {
+    import CountInversions.countInversions
+
+    "should count the number of inversions in an array" in {
+      val lst: List[Int] = List(2, 3, 9, 2, 9)
+      countInversions(lst, lst.length)._2 shouldEqual 2
+    }
+
+    "should have n over 2 inversions when the list is reverse sorted" in {
+      val n: Int = 20
+      countInversions((n to 1 by -1).toList, n)._2 shouldEqual n * (n - 1) / 2
+    }
+  }
 }
