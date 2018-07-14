@@ -7,7 +7,6 @@ def convert_to_intlist(line):
 
 def merge_sorted_arrays(first, second, length_1, length_2, inversions):
     merged_list = []
-    total_inversions = inversions
     ix = 0
     jy = 0
     while ix < length_1 or jy < length_2:
@@ -26,8 +25,8 @@ def merge_sorted_arrays(first, second, length_1, length_2, inversions):
             else:
                 merged_list.append(y)
                 jy += 1
-                total_inversions += (length_1 - ix)
-    return merged_list, total_inversions
+                inversions += (length_1 - ix)
+    return merged_list, inversions
 
 
 def count_inversions(array, length):

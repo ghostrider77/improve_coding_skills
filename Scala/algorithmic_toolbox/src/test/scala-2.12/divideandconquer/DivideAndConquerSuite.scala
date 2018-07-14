@@ -49,4 +49,38 @@ class DivideAndConquerSuite extends FreeSpec with Matchers {
       countInversions((n to 1 by -1).toList, n)._2 shouldEqual n * (n - 1) / 2
     }
   }
+
+  "OrganizingLottery" - {
+    import OrganizingLottery.numberOfSegmentsContainingPoints
+
+    "should return the number of segments containing points on the real line" - {
+      "test case 1" in {
+        val segments: Vector[(Int, Int)] = Vector((0, 5), (7, 10))
+        val points: List[Int] = List(1, 6, 11)
+        val (left, right): (Vector[Int], Vector[Int]) = segments.unzip
+        numberOfSegmentsContainingPoints(left, right, segments.length, points) shouldEqual List(1, 0, 0)
+      }
+
+      "test case 2" in {
+        val segments: Vector[(Int, Int)] = Vector((-10, 10))
+        val points: List[Int] = List(-100, 100, 0)
+        val (left, right): (Vector[Int], Vector[Int]) = segments.unzip
+        numberOfSegmentsContainingPoints(left, right, segments.length, points) shouldEqual List(0, 0, 1)
+      }
+
+      "test case 3" in {
+        val segments: Vector[(Int, Int)] = Vector((0, 5), (-3, 2), (7, 10))
+        val points: List[Int] = List(1, 6)
+        val (left, right): (Vector[Int], Vector[Int]) = segments.unzip
+        numberOfSegmentsContainingPoints(left, right, segments.length, points) shouldEqual List(2, 0)
+      }
+
+      "test case 4" in {
+        val segments: Vector[(Int, Int)] = Vector((0, 4), (-2, 2), (-1, 0), (0, 5), (6, 8))
+        val points: List[Int] = List(1, 4)
+        val (left, right): (Vector[Int], Vector[Int]) = segments.unzip
+        numberOfSegmentsContainingPoints(left, right, segments.length, points) shouldEqual List(3, 2)
+      }
+    }
+  }
 }
