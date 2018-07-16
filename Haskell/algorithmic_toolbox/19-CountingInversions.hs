@@ -3,8 +3,8 @@ convertToIntList :: String -> [Int]
 convertToIntList = map read . words
 
 
-mergeSortedArrays :: [Int] -> [Int] -> Int -> Int -> Integer -> ([Int], Integer)
-mergeSortedArrays first second length1 length2 inversions = merge first length1 second [] inversions
+mergeSortedArrays :: [Int] -> [Int] -> Int -> Integer -> ([Int], Integer)
+mergeSortedArrays first second length1 inversions = merge first length1 second [] inversions
     where
         merge :: [Int] -> Int -> [Int] -> [Int] -> Integer -> ([Int], Integer)
         merge xs xsLength ys acc totalInversions =
@@ -26,7 +26,7 @@ countInversions lst n
             (length1, length2) = (middle, n - middle)
             (sortedFirst, inversionsInFirst) = countInversions first length1
             (sortedSecond, inversionsInSecond) = countInversions second length2
-        in mergeSortedArrays sortedFirst sortedSecond length1 length2 (inversionsInFirst + inversionsInSecond)
+        in mergeSortedArrays sortedFirst sortedSecond length1 (inversionsInFirst + inversionsInSecond)
 
 
 main :: IO()

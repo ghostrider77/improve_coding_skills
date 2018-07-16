@@ -8,7 +8,6 @@ object CountInversions {
   private def mergeSortedArrays(first: List[Int],
                                 second: List[Int],
                                 length1: Int,
-                                length2: Int,
                                 inversions: Long): (List[Int], Long) = {
     @tailrec
     def merge(xs: List[Int],
@@ -34,7 +33,7 @@ object CountInversions {
       val (length1, length2): (Int, Int) = (middle, length - middle)
       val (sortedFirst, inversionsInFirst): (List[Int], Long) = countInversions(first, length1)
       val (sortedSecond, inversionsInSecond): (List[Int], Long) = countInversions(second, length2)
-      mergeSortedArrays(sortedFirst, sortedSecond, length1, length2, inversionsInFirst + inversionsInSecond)
+      mergeSortedArrays(sortedFirst, sortedSecond, length1, inversionsInFirst + inversionsInSecond)
     }
   }
 
