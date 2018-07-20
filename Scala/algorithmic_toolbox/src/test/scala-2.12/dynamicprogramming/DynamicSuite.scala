@@ -45,4 +45,48 @@ class DynamicSuite extends FreeSpec with Matchers {
       calcLevenshteinDistance("editing", "distance") shouldEqual 5
     }
   }
+
+  "ArithmeticExpression" - {
+    import ArithmeticExpression.{maximizeExpression, readInputData}
+
+    "should calculate the maximal value of an arithmetic expression when the order of computation is not fixed" - {
+      "test case 1" in {
+        val line: String = "1+5"
+        val (digits, operations): (List[Long], Vector[String]) = readInputData(line)
+        maximizeExpression(digits, operations) shouldEqual 6
+      }
+
+      "test case 2" in {
+        val line: String = "5-8+7*4-8+9"
+        val (digits, operations): (List[Long], Vector[String]) = readInputData(line)
+        maximizeExpression(digits, operations) shouldEqual 200
+      }
+    }
+  }
+
+  "LongestCommonSubsequence" - {
+    import LongestCommonSubsequence.{calcLongestCommonSubsequence, Sequence}
+
+    "should calculate the length of the longest common subsequence of 3 integer vector" - {
+      "test case 1" in {
+        val sequences: List[Sequence] =
+          List(
+            Sequence(seq = Vector(1, 2, 3), length = 3),
+            Sequence(seq = Vector(2, 1, 3), length = 3),
+            Sequence(seq = Vector(1, 3, 5), length = 3)
+          )
+        calcLongestCommonSubsequence(sequences) shouldEqual 2
+      }
+
+      "test case 2" in {
+        val sequences: List[Sequence] =
+          List(
+            Sequence(seq = Vector(8, 3, 2, 1, 7), length = 5),
+            Sequence(seq = Vector(8, 2, 1, 3, 8, 10, 7), length = 7),
+            Sequence(seq = Vector(6, 8, 3, 1, 4, 7), length = 6)
+          )
+        calcLongestCommonSubsequence(sequences) shouldEqual 3
+      }
+    }
+  }
 }
