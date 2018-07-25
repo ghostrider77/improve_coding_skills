@@ -83,4 +83,31 @@ class DivideAndConquerSuite extends FreeSpec with Matchers {
       }
     }
   }
+
+  "ClosestPairOfPoints" - {
+    import ClosestPairOfPoints.{Point, distanceOfClosestPairOfPoints}
+
+    "should calculate the distance of the closest pair of points" - {
+      val absoluteTolerance: Double = 1e-4
+
+      "test case 1" in {
+        val points: Vector[Point] = Vector(Point(0, 0), Point(3, 4))
+        distanceOfClosestPairOfPoints(points, points.length) shouldBe (5.0 +- absoluteTolerance)
+      }
+
+      "test case 2" in {
+        val points: Vector[Point] = Vector(Point(7, 7), Point(1, 100), Point(4, 8), Point(7, 7))
+        distanceOfClosestPairOfPoints(points, points.length) shouldBe (0.0 +- absoluteTolerance)
+      }
+
+      "test case 3" in {
+        val points: Vector[Point] =
+          Vector(
+            Point(4, 4), Point(-2, -2), Point(-3, -4), Point(-1, 3), Point(2, 3), Point(-4, 0), Point(1, 1),
+            Point(-1, -1), Point(3, -1), Point(-4, 2), Point(-2, 4)
+          )
+        distanceOfClosestPairOfPoints(points, points.length) shouldBe (1.414213 +- absoluteTolerance)
+      }
+    }
+  }
 }
