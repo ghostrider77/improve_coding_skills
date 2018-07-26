@@ -2,6 +2,7 @@ package divideandconquer
 
 object ClosestPairOfPoints {
   import Point.distance
+  private val BruteForceSize: Int = 3
 
   final case class Point(x: Double, y: Double)
 
@@ -43,7 +44,7 @@ object ClosestPairOfPoints {
   }
 
   private def findClosestPoints(sortedPoints: Vector[Point], n: Int): Double = {
-    if (n <= 3) calcSmallestPairwiseDistance(sortedPoints, Double.MaxValue, 2)
+    if (n <= BruteForceSize) calcSmallestPairwiseDistance(sortedPoints, Double.MaxValue, BruteForceSize - 1)
     else {
       val middleIx: Int = n / 2
       val medianX: Double = sortedPoints(middleIx).x

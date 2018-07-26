@@ -2,8 +2,10 @@ import sys
 from math import sqrt, inf
 from collections import namedtuple
 
-Point = namedtuple("Point", ["x", "y"])
 
+BRUTE_FORCE_SIZE = 3
+
+Point = namedtuple("Point", ["x", "y"])
 
 def convert_to_intlist(line):
     return [int(elem) for elem in line.split()]
@@ -31,12 +33,12 @@ def find_points_in_stripe(first, second, median, delta):
 
 def calc_minimum_distance_in_stripe(first, second, median, delta):
     stripe = sorted(find_points_in_stripe(first, second, median, delta), key=lambda p: p.y)
-    return get_smallest_pairwise_distances(stripe, min_dist=delta, nr_points_to_compare_with=7)
+    return get_smallest_pairwise_distances(stripe, min_dist=delta, compare_with=7)
 
 
-def get_smallest_pairwise_distances(points, min_dist, nr_points_to_compare_with):
+def get_smallest_pairwise_distances(points, min_dist, compare_with):
     for ix, p in enumerate(points):
-        for q in points[ix+1:ix+nr_points_to_compare_with+1]:
+        for q in points[ix+1:ix+compare_with+1]:
             dist = distance(p, q)
             if dist < min_dist:
                 min_dist = dist
@@ -44,8 +46,8 @@ def get_smallest_pairwise_distances(points, min_dist, nr_points_to_compare_with)
 
 
 def find_closest_points(sorted_points, length):
-    if length <= 3:
-        return get_smallest_pairwise_distances(sorted_points, min_dist=inf, nr_points_to_compare_with=2)
+    if length <= BRUTE_FORCE_SIZE:
+        return get_smallest_pairwise_distances(sorted_points, min_dist=inf, compare_with=BRUTE_FORCE_SIZE-1)
     middle = length // 2
     median_x = sorted_points[middle][0]
     first, second = sorted_points[:middle], sorted_points[middle:]
