@@ -2,7 +2,6 @@ import sys
 from math import sqrt, inf
 from collections import namedtuple
 
-
 BRUTE_FORCE_SIZE = 3
 
 Point = namedtuple("Point", ["x", "y"])
