@@ -1,5 +1,5 @@
 import Control.Monad (replicateM)
-import Data.Array (Array(..), listArray, (!), range)
+import Data.Array (listArray, (!), range)
 
 
 calcLevenshteinDistance :: String -> String -> Int

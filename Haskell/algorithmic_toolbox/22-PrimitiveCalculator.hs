@@ -31,10 +31,10 @@ findPreviousMinimum lookupArrays k =
 runCalculator :: Int -> [Int]
 runCalculator n = if (n == 1) then [n] else backtrackCalculation backtrack n
     where
-        lookupArrays = generate n updateLookupArrays
+        lookupArrays = generate n fillLookupArrays
         backtrack = snd $ V.unzip lookupArrays
-        updateLookupArrays :: Int -> (Int, Int)
-        updateLookupArrays k = if (k == 0)  then (0, 0) else (previousMinimum + 1, position)
+        fillLookupArrays :: Int -> (Int, Int)
+        fillLookupArrays k = if (k == 0)  then (0, 0) else (previousMinimum + 1, position)
             where (previousMinimum, position) = findPreviousMinimum lookupArrays (k + 1)
 
 
