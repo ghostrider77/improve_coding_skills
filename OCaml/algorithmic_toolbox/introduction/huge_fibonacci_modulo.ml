@@ -13,11 +13,11 @@ let calc_fibonacci_modulo n modulus =
 
 
 let calc_huge_fibonacci_modulo n modulus =
-    let p = calc_pisano_period modulus in
-        calc_fibonacci_modulo (n mod p) modulus
+    let p = calc_pisano_period modulus
+    in calc_fibonacci_modulo (n mod p) modulus
 
 
 let () =
     let (n, modulus) = Scanf.scanf "%d %d" (fun x y -> (x, y)) in
-        print_int (calc_huge_fibonacci_modulo n modulus);
-        print_newline()
+    print_int (calc_huge_fibonacci_modulo n modulus);
+    print_newline()

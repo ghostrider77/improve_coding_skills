@@ -4,5 +4,5 @@ let rec calc_gcd a b =
 
 let () =
     let (a, b) = Scanf.scanf "%d %d" (fun x y -> (x, y)) in
-        print_int (calc_gcd a b);
-        print_newline()
+    print_int (calc_gcd a b);
+    print_newline()

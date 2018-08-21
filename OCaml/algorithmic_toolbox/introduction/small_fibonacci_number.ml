@@ -5,6 +5,6 @@ let fibonacci n =
 
 
 let () =
-  let n = read_int() in
+    let n = read_int() in
     print_int (fibonacci n);
     print_newline()

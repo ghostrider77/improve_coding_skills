@@ -12,11 +12,11 @@ let process_next_elem acc x =
 
 let calc_maximum_pairwise_product list =
     let result = List.fold_left process_next_elem {largest = min_int; second_largest = min_int} list in
-        result.largest * result.second_largest
+    result.largest * result.second_largest
 
 
 let () =
     let line = read_line () in
-        let list = convert_to_inlist line in
-            print_int (calc_maximum_pairwise_product list);
-            print_newline ()
+    let list = convert_to_inlist line in
+    print_int (calc_maximum_pairwise_product list);
+    print_newline ()
