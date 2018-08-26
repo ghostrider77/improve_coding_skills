@@ -6,9 +6,7 @@ let compare_numbers s1 s2 =
         else 1
 
 
-let find_largest_number_from_pieces number_strings =
-    let sorted_strings = List.sort compare_numbers number_strings in
-    sorted_strings
+let find_largest_number_from_pieces number_strings = List.sort compare_numbers number_strings
 
 
 let () =
