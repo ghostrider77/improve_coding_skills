@@ -1,4 +1,4 @@
-let convert_to_inlist line = List.map int_of_string (Str.split (Str.regexp " ") line)
+let convert_to_intlist line = List.map int_of_string (Str.split (Str.regexp " ") line)
 
 
 let calc_maximal_revenue profit_per_click average_click_per_day =
@@ -8,7 +8,7 @@ let calc_maximal_revenue profit_per_click average_click_per_day =
 
 let () =
     let _ = read_int() in
-    let profit_per_click = convert_to_inlist (read_line()) in
-    let average_click_per_day = convert_to_inlist (read_line()) in
+    let profit_per_click = convert_to_intlist (read_line()) in
+    let average_click_per_day = convert_to_intlist (read_line()) in
     print_int (calc_maximal_revenue profit_per_click average_click_per_day);
     print_newline()

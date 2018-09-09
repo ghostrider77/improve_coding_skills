@@ -7,7 +7,7 @@ module IntMap =
         )
 
 
-let convert_to_inlist line = List.map int_of_string (Str.split (Str.regexp " ") line)
+let convert_to_intlist line = List.map int_of_string (Str.split (Str.regexp " ") line)
 
 
 let count_elements lst =
@@ -24,6 +24,6 @@ let has_majority_elem lst n =
 
 let () =
     let n = read_int() in
-    let lst = convert_to_inlist (read_line()) in
+    let lst = convert_to_intlist (read_line()) in
     print_int (if (has_majority_elem lst n) then 1 else 0);
     print_newline()

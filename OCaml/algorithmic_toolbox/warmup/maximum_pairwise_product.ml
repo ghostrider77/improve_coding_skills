@@ -1,7 +1,7 @@
 type largest_elems = {largest : int; second_largest : int}
 
 
-let convert_to_inlist line = List.map int_of_string (Str.split (Str.regexp " ") line)
+let convert_to_intlist line = List.map int_of_string (Str.split (Str.regexp " ") line)
 
 
 let process_next_elem acc x =
@@ -17,6 +17,6 @@ let calc_maximum_pairwise_product list =
 
 let () =
     let line = read_line () in
-    let list = convert_to_inlist line in
+    let list = convert_to_intlist line in
     print_int (calc_maximum_pairwise_product list);
     print_newline ()

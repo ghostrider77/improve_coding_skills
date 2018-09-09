@@ -1,4 +1,4 @@
-let convert_to_inlist line = List.map int_of_string (Str.split (Str.regexp " ") line)
+let convert_to_intlist line = List.map int_of_string (Str.split (Str.regexp " ") line)
 
 
 let find_query_element input_vector length query =
@@ -18,8 +18,8 @@ let find_elems_in_list lst n queries =
 
 
 let () =
-    let input_list = convert_to_inlist (read_line()) in
-    let query_list = convert_to_inlist (read_line()) in
+    let input_list = convert_to_intlist (read_line()) in
+    let query_list = convert_to_intlist (read_line()) in
     let result = find_elems_in_list (List.tl input_list) (List.hd input_list) (List.tl query_list) in
     List.iter (fun elem -> print_int elem; print_string " ") result;
     print_newline()

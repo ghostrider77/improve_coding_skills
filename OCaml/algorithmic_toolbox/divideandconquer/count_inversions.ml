@@ -2,7 +2,7 @@
 #require "batteries"
 open Batteries
 
-let convert_to_inlist line = BatList.map int_of_string (Str.split (Str.regexp " ") line)
+let convert_to_intlist line = BatList.map int_of_string (Str.split (Str.regexp " ") line)
 
 
 let merge_sorted_arrays first second length1 inversions =
@@ -29,7 +29,7 @@ let rec count_inversions lst length =
 
 let () =
     let n = read_int() in
-    let lst = convert_to_inlist (read_line()) in
+    let lst = convert_to_intlist (read_line()) in
     let _, result = count_inversions lst n in
     print_int result;
     print_newline()
