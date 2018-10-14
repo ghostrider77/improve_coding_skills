@@ -1,4 +1,3 @@
-
 open Batteries
 
 let allowed_operations = [('+', (+)); ('-', (-)); ('*', ( * ))]

@@ -1,13 +1,11 @@
-#use "topfind"
-#require "batteries"
 open Batteries
 
-let convert_to_intlist line = BatList.map int_of_string (Str.split (Str.regexp " ") line)
+let convert_to_intlist line = List.map int_of_string (Str.split (Str.regexp " ") line)
 
 
 let merge_sorted_arrays first second length1 inversions =
     let rec merge xs xs_length ys acc total_inversions = match (xs, ys) with
-        | [], [] -> BatList.rev acc, total_inversions
+        | [], [] -> List.rev acc, total_inversions
         | [], y :: yss -> merge [] xs_length yss (y :: acc) total_inversions
         | x :: xss, [] -> merge xss (xs_length - 1) [] (x :: acc) total_inversions
         | x :: xss, y :: yss ->
@@ -20,7 +18,7 @@ let rec count_inversions lst length =
     if length <= 1 then lst, 0
     else
         let middle = length / 2 in
-        let first, second = BatList.split_at middle lst in
+        let first, second = List.split_at middle lst in
         let length1, length2 = middle, length - middle in
         let sorted_first, inversions_first = count_inversions first length1 in
         let sorted_second, inversions_second = count_inversions second length2 in

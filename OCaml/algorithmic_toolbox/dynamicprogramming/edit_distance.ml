@@ -1,4 +1,3 @@
-
 open Batteries
 
 let calc_Levenshtein_distance string1 string2 =

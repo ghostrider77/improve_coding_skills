@@ -1,4 +1,3 @@
-
 let nominators = [2; 3]
 
 

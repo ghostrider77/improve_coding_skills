@@ -1,4 +1,3 @@
-
 open Batteries
 
 type sequence = { seq : int array; len : int }
