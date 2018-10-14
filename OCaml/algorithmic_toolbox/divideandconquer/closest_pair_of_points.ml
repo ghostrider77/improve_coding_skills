@@ -32,10 +32,7 @@ let calc_smallest_pairwise_distance points min_distance ~nr_points_compare_with 
 
 let calc_minimum_distance_in_stripe first second median delta =
     let in_stripe { x } = abs_float (x -. median) <= delta in
-    let cmp_by_y { y=y' } { y=y'' } =
-        if y' < y'' then -1
-        else if y' = y'' then 0
-        else -1 in
+    let cmp_by_y { y=y' } { y=y'' } = compare y' y'' in
     let stripe = (List.filter in_stripe first) @ (List.filter in_stripe second)
     in calc_smallest_pairwise_distance (List.sort cmp_by_y stripe) delta ~nr_points_compare_with:7
 
@@ -55,10 +52,7 @@ let rec find_closest_points sorted_points n =
 
 
 let find_closest_pair_of_points points n =
-    let cmp_by_x { x=x' } { x=x'' } =
-        if x' < x'' then -1
-        else if x' = x'' then 0
-        else 1 in
+    let cmp_by_x { x=x' } { x=x'' } = compare x' x'' in
     let sorted_points = List.sort cmp_by_x points
     in find_closest_points sorted_points n
 
