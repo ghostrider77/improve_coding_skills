@@ -2,7 +2,6 @@ open Batteries
 
 type sequence = { seq : int array; len : int }
 
-
 let convert_to_intlist line = List.map int_of_string Str.(line |> split (regexp " "))
 
 

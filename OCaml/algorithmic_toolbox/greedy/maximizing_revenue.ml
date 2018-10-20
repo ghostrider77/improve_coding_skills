@@ -1,9 +1,9 @@
-let convert_to_intlist line = List.map int_of_string (Str.split (Str.regexp " ") line)
+let convert_to_intlist line = List.map int_of_string Str.(line |> split (regexp " "))
 
 
 let calc_maximal_revenue profit_per_click average_click_per_day =
-    let zipped = List.combine (List.sort compare profit_per_click) (List.sort compare average_click_per_day)
-    in List.fold_left (fun acc (p, a) -> acc + p * a) 0 zipped
+    List.fold_left2
+        (fun acc p c -> acc + p * c) 0 (List.sort compare profit_per_click) (List.sort compare average_click_per_day)
 
 
 let () =

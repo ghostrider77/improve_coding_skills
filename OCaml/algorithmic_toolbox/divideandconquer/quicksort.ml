@@ -1,6 +1,6 @@
 let () = Random.init 2112
 
-let convert_to_intlist line = List.map int_of_string (Str.split (Str.regexp " ") line)
+let convert_to_intlist line = List.map int_of_string Str.(line |> split (regexp " "))
 
 
 let three_way_partitioning arr pivot start_index end_index =
@@ -38,5 +38,5 @@ let () =
     let n = read_int() in
     let arr = convert_to_intlist (read_line()) |> Array.of_list in
     quicksort arr n;
-    Array.iter (fun elem -> print_int elem; print_string " ") arr;
+    Array.iter (function elem -> print_int elem; print_string " ") arr;
     print_newline()

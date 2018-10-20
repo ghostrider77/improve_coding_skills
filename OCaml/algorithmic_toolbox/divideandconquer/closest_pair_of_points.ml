@@ -2,7 +2,6 @@ open Batteries
 
 type point = { x : float; y : float }
 
-
 let brute_force_size = 3
 
 

@@ -11,5 +11,5 @@ let () =
     let result = decompose_to_distinct_elems n in
     print_int (List.length result);
     print_newline();
-    List.iter (fun elem -> print_int elem; print_string " ") result;
+    List.iter (function elem -> print_int elem; print_string " ") result;
     print_newline()

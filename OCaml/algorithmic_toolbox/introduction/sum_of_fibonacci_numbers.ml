@@ -3,8 +3,8 @@ let modulus = 10
 
 let modulo a b =
     let result = a mod b in
-        if result >= 0 then result
-        else result + b
+    if result >= 0 then result
+    else result + b
 
 
 let calc_pisano_period modulus =

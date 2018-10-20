@@ -6,8 +6,7 @@ module IntMap =
         end
         )
 
-
-let convert_to_intlist line = List.map int_of_string (Str.split (Str.regexp " ") line)
+let convert_to_intlist line = List.map int_of_string Str.(line |> split (regexp " "))
 
 
 let count_elements lst =
