@@ -83,4 +83,38 @@ class IntroductionSuite extends FreeSpec with Matchers {
       }
     }
   }
+
+  "NetworkPacketProcessing" - {
+    import NetworkPacketProcessing.{Packet, processPackets}
+
+    "should calculate the time when the process of each packet has started" - {
+      "test case 1" in {
+        val bufferSize: Int = 1
+        val nrPackets: Int = 0
+        val packets: List[Packet] = Nil
+        processPackets(packets, bufferSize, nrPackets) shouldBe empty
+      }
+
+      "test case 2" in {
+        val bufferSize: Int = 1
+        val nrPackets: Int = 1
+        val packets: List[Packet] = List(Packet(0, 0, 0))
+        processPackets(packets, bufferSize, nrPackets) shouldEqual Array(0)
+      }
+
+      "test case 3" in {
+        val bufferSize: Int = 1
+        val nrPackets: Int = 2
+        val packets: List[Packet] = List(Packet(0, 0, 1), Packet(1, 0, 1))
+        processPackets(packets, bufferSize, nrPackets) shouldEqual Array(0, -1)
+      }
+
+      "test case 4" in {
+        val bufferSize: Int = 1
+        val nrPackets: Int = 2
+        val packets: List[Packet] = List(Packet(0, 0, 1), Packet(1, 1, 1))
+        processPackets(packets, bufferSize, nrPackets) shouldEqual Array(0, 1)
+      }
+    }
+  }
 }
