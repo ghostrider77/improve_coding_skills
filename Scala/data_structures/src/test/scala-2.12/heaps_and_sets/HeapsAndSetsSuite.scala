@@ -98,4 +98,36 @@ class HeapsAndSetsSuite extends FreeSpec with Matchers {
       }
     }
   }
+
+  "MergingTables" - {
+    import MergingTables.{processMergeRequests, TableOperation}
+
+    "should calculate the largest table after each database merge operation" - {
+      "test case 1" in {
+        val nrTables: Int = 5
+        val tableRows: List[Int] = List.fill(nrTables)(1)
+        val operations: List[TableOperation] =
+          List(
+            TableOperation(destination = 2, source = 4),
+            TableOperation(destination = 1, source = 3),
+            TableOperation(destination = 0, source = 3),
+            TableOperation(destination = 4, source = 3),
+            TableOperation(destination = 4, source = 2)
+          )
+        processMergeRequests(tableRows, nrTables, operations) shouldEqual List(2, 2, 3, 5, 5)
+      }
+
+      "test case 2" in {
+        val tableRows: List[Int] = List(10, 0, 5, 0, 3, 3)
+        val operations: List[TableOperation] =
+          List(
+            TableOperation(destination = 5, source = 5),
+            TableOperation(destination = 5, source = 4),
+            TableOperation(destination = 4, source = 3),
+            TableOperation(destination = 3, source = 2)
+          )
+        processMergeRequests(tableRows, tableRows.length, operations) shouldEqual List(10, 10, 10, 11)
+      }
+    }
+  }
 }
