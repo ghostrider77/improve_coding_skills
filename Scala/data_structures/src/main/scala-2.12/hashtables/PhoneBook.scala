@@ -1,4 +1,4 @@
-package heaps_and_sets
+package hashtables
 
 object PhoneBook {
   import scala.annotation.tailrec
@@ -24,7 +24,7 @@ object PhoneBook {
 
   private def convertToList(line: String): List[String] = line.split(" ").toList
 
-  private[heaps_and_sets] def readQueries(reader: Iterator[String], nrQueries: Int): List[Query] = {
+  private[hashtables] def readQueries(reader: Iterator[String], nrQueries: Int): List[Query] = {
     (for { _ <- 0 until nrQueries } yield {
       convertToList(reader.next()) match {
         case List("add", number, name) => Addition(number.toInt, name)
