@@ -47,4 +47,72 @@ class HashTablesSuite extends FreeSpec with Matchers {
       }
     }
   }
+
+  "HashingWithChains" - {
+    import HashingWithChains.{processQueries, readQueries, Query}
+
+    "should read and write strings into a hash table" - {
+      "test case 1" in {
+        val nrBuckets: Int = 5
+        val nrQueries: Int = 12
+        val rawLines: Iterator[String] =
+          List(
+            "add world",
+            "add HellO",
+            "check 4",
+            "find World",
+            "find world",
+            "del world",
+            "check 4",
+            "del HellO",
+            "add luck",
+            "add GooD",
+            "check 2",
+            "del good"
+          ).toIterator
+        val queries: List[Query] = readQueries(rawLines, nrQueries)
+        processQueries(queries, nrBuckets) shouldEqual List("HellO world", "no", "yes", "HellO", "GooD luck")
+      }
+
+      "test case 2" in {
+        val nrBuckets: Int = 4
+        val nrQueries: Int = 8
+        val rawLines: Iterator[String] =
+          List(
+            "add test",
+            "add test",
+            "find test",
+            "del test",
+            "find test",
+            "find Test",
+            "add Test",
+            "find Test"
+          ).toIterator
+        val queries: List[Query] = readQueries(rawLines, nrQueries)
+        processQueries(queries, nrBuckets) shouldEqual List("yes", "no", "no", "yes")
+      }
+
+      "test case 3" in {
+        val nrBuckets: Int = 3
+        val nrQueries: Int = 12
+        val rawLines: Iterator[String] =
+          List(
+            "check 0",
+            "find help",
+            "add help",
+            "add del",
+            "add add",
+            "find add",
+            "find del",
+            "del del",
+            "find del",
+            "check 0",
+            "check 1",
+            "check 2"
+          ).toIterator
+        val queries: List[Query] = readQueries(rawLines, nrQueries)
+        processQueries(queries, nrBuckets) shouldEqual List("", "no", "yes", "yes", "no", "", "add help", "")
+      }
+    }
+  }
 }
