@@ -115,4 +115,28 @@ class HashTablesSuite extends FreeSpec with Matchers {
       }
     }
   }
+
+  "RabinKarp" - {
+    import RabinKarp.{findPatternInText, Prime}
+
+    "should find the indices of a text where pattern appears as substring" - {
+      "test case 1" in {
+        val pattern: String = "aba"
+        val text: String = "abacaba"
+        findPatternInText(text, pattern, Prime) shouldEqual List(0, 4)
+      }
+
+      "test case 2" in {
+        val pattern: String = "Test"
+        val text: String = "testTesttesT"
+        findPatternInText(text, pattern, Prime) shouldEqual List(4)
+      }
+
+      "test case 3" in {
+        val pattern: String = "aaaaa"
+        val text: String = "baaaaaaa"
+        findPatternInText(text, pattern, Prime) shouldEqual List(1, 2, 3)
+      }
+    }
+  }
 }
