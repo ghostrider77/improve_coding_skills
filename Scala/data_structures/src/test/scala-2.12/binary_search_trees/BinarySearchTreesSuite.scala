@@ -48,4 +48,166 @@ class BinarySearchTreesSuite extends FreeSpec with Matchers {
       }
     }
   }
+
+  "ValidBinarySearchTree" - {
+    import ValidBinarySearchTree.{BinaryTree, Node, isValidBinarySearchTree, readNodeInformation}
+
+    "should detect if the binary tree is a binary search tree" - {
+      "test case 1" in {
+        val nrNodes: Int = 3
+        val lines: Iterator[String] = List("2 1 2", "1 -1 -1", "3 -1 -1").toIterator
+        val nodes: Vector[Node] = readNodeInformation(lines, nrNodes)
+        val tree = new BinaryTree(nodes)
+        isValidBinarySearchTree(tree, nrNodes) shouldBe true
+      }
+
+      "test case 2" in {
+        val nrNodes: Int = 3
+        val lines: Iterator[String] = List("1 1 2", "2 -1 -1", "3 -1 -1").toIterator
+        val nodes: Vector[Node] = readNodeInformation(lines, nrNodes)
+        val tree = new BinaryTree(nodes)
+        isValidBinarySearchTree(tree, nrNodes) shouldBe false
+      }
+
+      "test case 3" in {
+        val nrNodes: Int = 0
+        val lines: Iterator[String] = List().toIterator
+        val nodes: Vector[Node] = readNodeInformation(lines, nrNodes)
+        val tree = new BinaryTree(nodes)
+        isValidBinarySearchTree(tree, nrNodes) shouldBe true
+      }
+
+      "test case 4" in {
+        val nrNodes: Int = 5
+        val lines: Iterator[String] =
+          List(
+            "1 -1 1",
+            "2 -1 2",
+            "3 -1 3",
+            "4 -1 4",
+            "5 -1 -1"
+          ).toIterator
+        val nodes: Vector[Node] = readNodeInformation(lines, nrNodes)
+        val tree = new BinaryTree(nodes)
+        isValidBinarySearchTree(tree, nrNodes) shouldBe true
+      }
+
+      "test case 5" in {
+        val nrNodes: Int = 7
+        val lines: Iterator[String] =
+          List(
+            "4 1 2",
+            "2 3 4",
+            "6 5 6",
+            "1 -1 -1",
+            "3 -1 -1",
+            "5 -1 -1",
+            "7 -1 -1"
+          ).toIterator
+        val nodes: Vector[Node] = readNodeInformation(lines, nrNodes)
+        val tree = new BinaryTree(nodes)
+        isValidBinarySearchTree(tree, nrNodes) shouldBe true
+      }
+
+      "test case 6" in {
+        val nrNodes: Int = 4
+        val lines: Iterator[String] =
+          List(
+            "4 1 -1",
+            "2 2 3",
+            "1 -1 -1",
+            "5 -1 -1"
+          ).toIterator
+        val nodes: Vector[Node] = readNodeInformation(lines, nrNodes)
+        val tree = new BinaryTree(nodes)
+        isValidBinarySearchTree(tree, nrNodes) shouldBe false
+      }
+    }
+  }
+
+  "ValidBinarySearchTreeHard" - {
+    import ValidBinarySearchTreeHard.{BinaryTree, Node, isValidBinarySearchTree, readNodeInformation}
+
+    "should detect if the binary tree is a binary search tree" - {
+      "test case 1" in {
+        val nrNodes: Int = 3
+        val lines: Iterator[String] = List("2 1 2", "1 -1 -1", "3 -1 -1").toIterator
+        val nodes: Vector[Node] = readNodeInformation(lines, nrNodes)
+        val tree = new BinaryTree(nodes)
+        isValidBinarySearchTree(tree, nrNodes) shouldBe true
+      }
+
+      "test case 2" in {
+        val nrNodes: Int = 3
+        val lines: Iterator[String] = List("1 1 2", "2 -1 -1", "3 -1 -1").toIterator
+        val nodes: Vector[Node] = readNodeInformation(lines, nrNodes)
+        val tree = new BinaryTree(nodes)
+        isValidBinarySearchTree(tree, nrNodes) shouldBe false
+      }
+
+      "test case 3" in {
+        val nrNodes: Int = 3
+        val lines: Iterator[String] = List("2 1 2", "1 -1 -1", "2 -1 -1").toIterator
+        val nodes: Vector[Node] = readNodeInformation(lines, nrNodes)
+        val tree = new BinaryTree(nodes)
+        isValidBinarySearchTree(tree, nrNodes) shouldBe true
+      }
+
+      "test case 4" in {
+        val nrNodes: Int = 3
+        val lines: Iterator[String] = List("2 1 2", "2 -1 -1", "3 -1 -1").toIterator
+        val nodes: Vector[Node] = readNodeInformation(lines, nrNodes)
+        val tree = new BinaryTree(nodes)
+        isValidBinarySearchTree(tree, nrNodes) shouldBe false
+      }
+
+      "test case 5" in {
+        val nrNodes: Int = 0
+        val lines: Iterator[String] = List().toIterator
+        val nodes: Vector[Node] = readNodeInformation(lines, nrNodes)
+        val tree = new BinaryTree(nodes)
+        isValidBinarySearchTree(tree, nrNodes) shouldBe true
+      }
+
+      "test case 6" in {
+        val nrNodes: Int = 1
+        val lines: Iterator[String] = List("2147483647 -1 -1").toIterator
+        val nodes: Vector[Node] = readNodeInformation(lines, nrNodes)
+        val tree = new BinaryTree(nodes)
+        isValidBinarySearchTree(tree, nrNodes) shouldBe true
+      }
+
+      "test case 7" in {
+        val nrNodes: Int = 5
+        val lines: Iterator[String] =
+          List(
+            "1 -1 1",
+            "2 -1 2",
+            "3 -1 3",
+            "4 -1 4",
+            "5 -1 -1"
+          ).toIterator
+        val nodes: Vector[Node] = readNodeInformation(lines, nrNodes)
+        val tree = new BinaryTree(nodes)
+        isValidBinarySearchTree(tree, nrNodes) shouldBe true
+      }
+
+      "test case 8" in {
+        val nrNodes: Int = 7
+        val lines: Iterator[String] =
+          List(
+            "4 1 2",
+            "2 3 4",
+            "6 5 6",
+            "1 -1 -1",
+            "3 -1 -1",
+            "5 -1 -1",
+            "7 -1 -1"
+          ).toIterator
+        val nodes: Vector[Node] = readNodeInformation(lines, nrNodes)
+        val tree = new BinaryTree(nodes)
+        isValidBinarySearchTree(tree, nrNodes) shouldBe true
+      }
+    }
+  }
 }
