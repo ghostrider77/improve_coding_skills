@@ -55,7 +55,6 @@ object PhoneBook {
   }
 
   def main(args: Array[String]): Unit = {
-    val t0 = System.nanoTime()
     val reader: Iterator[String] = scala.io.Source.stdin.getLines()
     val nrQueries: Int = reader.next().toInt
     val queries: List[Query] = readQueries(reader, nrQueries)
