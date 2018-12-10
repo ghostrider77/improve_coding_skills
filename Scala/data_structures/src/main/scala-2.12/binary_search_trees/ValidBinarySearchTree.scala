@@ -47,7 +47,6 @@ object ValidBinarySearchTree {
   }
 
   def main(args: Array[String]): Unit = {
-    val t0 = System.nanoTime()
     val reader: Iterator[String] = scala.io.Source.stdin.getLines()
     val nrNodes: Int = reader.next().toInt
     val nodes: Vector[Node] = readNodeInformation(reader, nrNodes)
