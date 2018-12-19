@@ -55,7 +55,6 @@ main = do
     let inorder = inorderTraversal tree
     let preorder = preorderTraversal tree
     let postorder = postorderTraversal tree
-    print "hello"
     putStrLn $ unwords $ map show inorder
     putStrLn $ unwords $ map show preorder
     putStrLn $ unwords $ map show postorder
