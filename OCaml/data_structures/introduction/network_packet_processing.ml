@@ -1,4 +1,4 @@
-open Core_kernel
+open Core_kernel.Deque
 
 type packet = { id : int; arrival_time : int; processing_time : int }
 type buffered_packet = { packet : packet; finish_time : int }
@@ -18,11 +18,11 @@ let read_all_packets n =
 
 
 let remove_finished_packets_from_buffer current_time buffer =
-    let rec remove removed_packets = match Dequeue.peek_front buffer with
+    let rec remove removed_packets = match peek_front buffer with
         | None -> removed_packets
         | Some { finish_time } ->
             if finish_time <= current_time then
-                let first_packet = Dequeue.dequeue_front_exn buffer in
+                let first_packet = dequeue_front_exn buffer in
                 remove (first_packet :: removed_packets)
             else removed_packets
     in remove []
@@ -36,18 +36,18 @@ let add_start_time_to_finished_packets process_start_time finished_packets =
 
 let process_packets network_packets max_buffer_size number_of_packets =
     let process_start_time = Array.make number_of_packets 0 in
-    let buffer = Dequeue.create ~initial_length:max_buffer_size () in
+    let buffer = create ~initial_length:max_buffer_size () in
     let insert_packet_to_buffer packet =
         let finished_packets = remove_finished_packets_from_buffer packet.arrival_time buffer in
         add_start_time_to_finished_packets process_start_time finished_packets;
-        if Dequeue.is_empty buffer then
-            Dequeue.enqueue_back buffer { packet; finish_time = packet.arrival_time + packet.processing_time }
-        else if Dequeue.length buffer >= max_buffer_size then process_start_time.(packet.id) <- -1
+        if is_empty buffer then
+            enqueue_back buffer { packet; finish_time = packet.arrival_time + packet.processing_time }
+        else if length buffer >= max_buffer_size then process_start_time.(packet.id) <- -1
         else
-            let { finish_time } = Dequeue.peek_back_exn buffer in
-            Dequeue.enqueue_back buffer { packet; finish_time = finish_time + packet.processing_time } in
+            let { finish_time } = peek_back_exn buffer in
+            enqueue_back buffer { packet; finish_time = finish_time + packet.processing_time } in
     List.iter insert_packet_to_buffer network_packets;
-    add_start_time_to_finished_packets process_start_time (Dequeue.to_list buffer);
+    add_start_time_to_finished_packets process_start_time (to_list buffer);
     process_start_time
 
 
