@@ -1,4 +1,3 @@
-#python3
 import sys
 from math import inf, isfinite
 from collections import defaultdict, deque
