@@ -55,17 +55,18 @@ class DecompositionsSuite extends FreeSpec with Matchers {
 
       "test case 2" in {
         val nrNodes: Int = 10
-        val edges = List(
-          Edge(1, 2),
-          Edge(2, 3),
-          Edge(3, 4),
-          Edge(2, 4),
-          Edge(3, 5),
-          Edge(4, 5),
-          Edge(4, 6),
-          Edge(8, 7),
-          Edge(9, 7)
-        )
+        val edges =
+          List(
+            Edge(1, 2),
+            Edge(2, 3),
+            Edge(3, 4),
+            Edge(2, 4),
+            Edge(3, 5),
+            Edge(4, 5),
+            Edge(4, 6),
+            Edge(8, 7),
+            Edge(9, 7)
+          )
         val graph: Graph = new Graph(edges, nrNodes)
         graph.connectedComponents should have length 3
       }
@@ -132,6 +133,31 @@ class DecompositionsSuite extends FreeSpec with Matchers {
         isTopologicalSortingValid(graph.adjacencyList, topologicalSorting) shouldBe true
         isTopologicalSortingValid(graph.adjacencyList, List(5, 4, 3, 2, 1)) shouldBe true
         isTopologicalSortingValid(graph.adjacencyList, List(1, 2, 3, 4, 5)) shouldBe false
+      }
+    }
+  }
+
+  "StronglyConnectedComponents" - {
+    import StronglyConnectedComponents.{Edge, calcStronglyConnectedComponents}
+
+    "should calculate the number of strongly connected components" - {
+      "test case 1" in {
+        val nrNodes: Int = 4
+        val edges: List[Edge] = List(Edge(1, 2), Edge(4, 1), Edge(2, 3), Edge(3, 1))
+        calcStronglyConnectedComponents(edges, nrNodes) should have length 2
+      }
+
+      "test case 2" in {
+        val nrNodes: Int = 5
+        val edges: List[Edge] = List(Edge(2, 1), Edge(3, 2), Edge(3, 1), Edge(4, 3), Edge(4, 1), Edge(5, 2), Edge(5, 3))
+        calcStronglyConnectedComponents(edges, nrNodes) should have length 5
+      }
+
+      "test case 3" in {
+        val nrNodes: Int = 6
+        val edges: List[Edge] =
+          List(Edge(1, 2), Edge(2, 1), Edge(2, 3), Edge(3, 4), Edge(4, 2), Edge(3, 5), Edge(5, 6), Edge(6, 5))
+        calcStronglyConnectedComponents(edges, nrNodes) should have length 2
       }
     }
   }
