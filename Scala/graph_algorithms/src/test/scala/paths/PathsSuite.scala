@@ -25,4 +25,24 @@ class PathsSuite extends FreeSpec with Matchers {
       }
     }
   }
+
+  "CheckBipartiteness" - {
+    import CheckBipartiteness.{Edge, Graph}
+
+    "should check whether a given undirected graph is bipartite" - {
+      "test case 1" in {
+        val nrNodes: Int = 4
+        val edges: List[Edge] = List(Edge(1, 2), Edge(4, 1), Edge(2, 3), Edge(3, 1))
+        val graph = new Graph(edges, nrNodes)
+        graph.isBipartite shouldBe false
+      }
+
+      "test case 2" in {
+        val nrNodes: Int = 5
+        val edges: List[Edge] = List(Edge(5, 2), Edge(4, 2), Edge(3, 4), Edge(1, 4))
+        val graph = new Graph(edges, nrNodes)
+        graph.isBipartite shouldBe true
+      }
+    }
+  }
 }
