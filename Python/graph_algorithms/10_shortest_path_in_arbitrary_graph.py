@@ -37,7 +37,7 @@ def update_distances(graph, distances, collect_relaxed_nodes):
         return relaxed_nodes
 
 
-def bellmann_ford(graph, s):
+def bellman_ford(graph, s):
     n = graph.nr_nodes
     distances = [inf] * n
     distances[s-1] = 0
@@ -62,7 +62,7 @@ def find_nodes_reachable_from_relaxed_nodes(relaxed_nodes, graph):
 
 def calculate_shortest_paths(edge_list, nr_nodes, start_node):
     graph = DirectedGraph(edge_list, nr_nodes)
-    distances, relaxed_nodes = bellmann_ford(graph, start_node)
+    distances, relaxed_nodes = bellman_ford(graph, start_node)
     infinite_distance_nodes = find_nodes_reachable_from_relaxed_nodes(relaxed_nodes, graph)
     for node in infinite_distance_nodes:
         distances[node-1] = -inf
