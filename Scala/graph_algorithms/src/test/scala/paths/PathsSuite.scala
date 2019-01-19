@@ -87,4 +87,28 @@ class PathsSuite extends FreeSpec with Matchers {
       }
     }
   }
+
+  "NegativeCycle" - {
+    import NegativeCycle.{Edge, detectNegativeCycle}
+
+    "should detect the presence or absence of negative cycles in a weighted directed graph" - {
+      "test case 1" in {
+        val nrNodes: Int = 4
+        val edges: List[Edge] = List(Edge(1, 2, -5), Edge(4, 1, 2), Edge(2, 3, 2), Edge(3, 1, 1))
+        detectNegativeCycle(edges, nrNodes) shouldBe true
+      }
+
+      "test case 2" in {
+        val nrNodes: Int = 4
+        val edges: List[Edge] = List(Edge(1, 2, -1), Edge(1, 3, -1), Edge(2, 3, -1), Edge(3, 4, -1), Edge(4, 1, 3))
+        detectNegativeCycle(edges, nrNodes) shouldBe false
+      }
+
+      "test case 3" in {
+        val nrNodes: Int = 4
+        val edges: List[Edge] = List(Edge(1, 2, -1), Edge(2, 1, -1), Edge(2, 3, 1), Edge(3, 4, 1), Edge(4, 3, 1))
+        detectNegativeCycle(edges, nrNodes) shouldBe true
+      }
+    }
+  }
 }
