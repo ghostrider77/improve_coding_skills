@@ -111,4 +111,43 @@ class PathsSuite extends FreeSpec with Matchers {
       }
     }
   }
+
+  "ShortestPathInArbitraryGraph" - {
+    import ShortestPathInArbitraryGraph.{Edge, Node, calcShortestPaths, convertDistanceToSymbol}
+
+    "should calculate the shortest path from a node in a directed graph which might contain a negative cycle" - {
+      "test case 1" in {
+        val nrNodes: Int = 6
+        val edges: List[Edge] =
+          List(
+            Edge(1, 2, 10),
+            Edge(2, 3, 5),
+            Edge(1, 3, 100),
+            Edge(3, 5, 7),
+            Edge(5, 4, 10),
+            Edge(4, 3, -18),
+            Edge(6, 1, -1)
+          )
+        val startNode: Node = 1
+        val distances: List[Double] = calcShortestPaths(edges, nrNodes, startNode)
+        distances.map(convertDistanceToSymbol) shouldEqual List("0", "10", "-", "-", "-", "*")
+      }
+
+      "test case 2" in {
+        val nrNodes: Int = 5
+        val edges: List[Edge] = List(Edge(1, 2, 1), Edge(4, 1, 2), Edge(2, 3, 2), Edge(3, 1, -5))
+        val startNode: Node = 4
+        val distances: List[Double] = calcShortestPaths(edges, nrNodes, startNode)
+        distances.map(convertDistanceToSymbol) shouldEqual List("-", "-", "-", "0", "*")
+      }
+
+      "test case 3" in {
+        val nrNodes: Int = 5
+        val edges: List[Edge] = List(Edge(1, 2, 2), Edge(2, 3, -3), Edge(3, 5, 100), Edge(3, 1, -1), Edge(4, 1, 1))
+        val startNode: Node = 4
+        val distances: List[Double] = calcShortestPaths(edges, nrNodes, startNode)
+        distances.map(convertDistanceToSymbol) shouldEqual List("-", "-", "-", "0", "-")
+      }
+    }
+  }
 }
