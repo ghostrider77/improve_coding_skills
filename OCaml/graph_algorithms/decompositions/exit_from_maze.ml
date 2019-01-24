@@ -4,14 +4,14 @@ module IntSet = Set.Make(
     struct
         type t = int
         let compare = Pervasives.compare
-end)
+    end)
 
 module IntDict = Hashtbl.Make(
     struct
         type t = int
         let equal = Pervasives.(=)
         let hash = Hashtbl.hash
-end)
+    end)
 
 module type GraphSig =
     sig
