@@ -12,7 +12,6 @@ module type GraphSig =
         type t
         type component = int list
         val create_graph : edge list -> int -> t
-        val get_neighbours : t -> int -> int list
         val connected_components : t -> component list
     end
 
