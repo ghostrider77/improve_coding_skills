@@ -4,7 +4,6 @@ object ShortestPath {
   import scala.collection.mutable.{Queue => MutableQueue}
 
   type Node = Int
-  type Component = List[Node]
 
   final case class Edge(from: Node, to: Node)
 
