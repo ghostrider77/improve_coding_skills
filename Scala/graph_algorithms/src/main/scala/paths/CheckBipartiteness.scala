@@ -5,7 +5,6 @@ object CheckBipartiteness {
   import scala.collection.mutable.{Queue => MutableQueue, Set => MutableSet}
 
   type Node = Int
-  type Component = List[Node]
 
   final case class Edge(from: Node, to: Node)
 
