@@ -6,7 +6,6 @@ object MinimumCostPath {
   import scala.collection.breakOut
 
   type Node = Int
-  type Component = List[Node]
 
   final case class Edge(from: Node, to: Node, weight: Int)
   final case class EdgeEndpoint(tip: Node, weight: Int)
