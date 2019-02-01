@@ -101,6 +101,6 @@ object ShortestPathInArbitraryGraph {
     }).toList
     val startNode: Node = reader.next().toInt
     val distances: List[Double] = calcShortestPaths(edgeList, nrNodes, startNode)
-    distances.foreach(convertDistanceToSymbol)
+    distances.foreach(convertDistanceToSymbol _ andThen println)
   }
 }
