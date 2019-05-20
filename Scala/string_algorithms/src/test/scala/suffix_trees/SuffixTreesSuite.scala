@@ -52,4 +52,29 @@ class SuffixTreesSuite extends FreeSpec with Matchers {
       }
     }
   }
+
+  "GeneralizedPatternMatching" - {
+    import GeneralizedPatternMatching.{appendTerminator, multiplePatternMatching}
+
+    "should return the indices where a pattern appears as substring in text where a pattern can be a " +
+      "prefix of another pattern" - {
+      "test case 1" in {
+        val text: String = "AAA"
+        val patterns: List[String] = List("AA").map(appendTerminator)
+        multiplePatternMatching(text, patterns) shouldEqual List(0, 1)
+      }
+
+      "test case 2" in {
+        val text: String = "ACATA"
+        val patterns: List[String] = List("AT", "A", "AG").map(appendTerminator)
+        multiplePatternMatching(text, patterns) shouldEqual List(0, 2, 4)
+      }
+
+      "test case 3" in {
+        val text: String = "BABCAD"
+        val patterns: List[String] = List("ABCA", "BCA", "ABD", "AB").map(appendTerminator)
+        multiplePatternMatching(text, patterns) shouldEqual List(1, 2)
+      }
+    }
+  }
 }
