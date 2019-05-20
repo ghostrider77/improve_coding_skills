@@ -1,6 +1,6 @@
 package suffix_trees
 
-object TrieConstruction {
+object MultiplePatternMatching {
   import scala.annotation.tailrec
 
   private type Node = Int
@@ -14,12 +14,20 @@ object TrieConstruction {
     private val root: Int = nodeCounter.next()
     private val adjacencyList: Map[Node, List[EdgeEndpoint]] = addWordsToTrie(this.words)
 
-    def stringRepresentation: List[String] = {
-      (for {
-        (node, neighbours) <- adjacencyList
-        EdgeEndpoint(neighbour, label) <- neighbours
-      } yield s"$node->$neighbour:$label").toList
+    def patternStarts(text: List[Char]): Boolean = {
+      @tailrec
+      def loop(ls: List[Char], currentNode: Node): Boolean = ls match {
+        case Nil => false
+        case letter :: lss => getNeighbourWithGivenLabel(adjacencyList, currentNode, letter) match {
+          case None => false
+          case Some(nextNode) => if (isLeaf(nextNode)) true else loop(lss, nextNode)
+        }
+      }
+
+      loop(text, root)
     }
+
+    private def isLeaf(node: Node): Boolean = !adjacencyList.contains(node)
 
     private def addWordsToTrie(words: List[String]): Map[Node, List[EdgeEndpoint]] = {
       @tailrec
@@ -46,7 +54,7 @@ object TrieConstruction {
               acc.updated(currentNode, EdgeEndpoint(nextNode, letter) :: acc.getOrElse(currentNode, Nil))
             loop(lss, updatedTrie, nextNode)
           case Some(node) => loop(lss, acc, node)
-          }
+        }
       }
 
       loop(w.toList, trie, root)
@@ -64,11 +72,25 @@ object TrieConstruction {
     }
   }
 
+  def multiplePatternMatching(text: String, patterns: List[String]): List[Int] = {
+    val trie = new Trie(patterns)
+    @tailrec
+    def loop(indices: List[Int], text: List[Char], ix: Int): List[Int] = text match {
+      case Nil => indices.reverse
+      case _ :: rest =>
+        val updatedIndices: List[Int] = if (trie.patternStarts(text)) ix :: indices else indices
+        loop(updatedIndices, rest, ix + 1)
+    }
+
+    loop(Nil, text.toList, 0)
+  }
+
   def main(args: Array[String]): Unit = {
     val reader: Iterator[String] = scala.io.Source.stdin.getLines()
+    val text: String = reader.next()
     val nrPatterns: Int = reader.next().toInt
     val patterns: List[String] = reader.take(nrPatterns).toList
-    val trie = new Trie(patterns)
-    trie.stringRepresentation.foreach(println)
+    val result: List[Int] = multiplePatternMatching(text, patterns)
+    println(result.mkString(" "))
   }
 }

@@ -28,4 +28,28 @@ class SuffixTreesSuite extends FreeSpec with Matchers {
       }
     }
   }
+
+  "MultiplePatternMatching" - {
+    import MultiplePatternMatching.multiplePatternMatching
+
+    "should return the list of indices where a pattern appears as substring in text" - {
+      "test case 1" in {
+        val text: String = "AAA"
+        val patterns: List[String] = List("AA")
+        multiplePatternMatching(text, patterns) shouldEqual List(0, 1)
+      }
+
+      "test case 2" in {
+        val text: String = "AA"
+        val patterns: List[String] = List("T")
+        multiplePatternMatching(text, patterns) shouldBe empty
+      }
+
+      "test case 3" in {
+        val text: String = "AATCGGGTTCAATCGGGGT"
+        val patterns: List[String] = List("ATCG", "GGGT")
+        multiplePatternMatching(text, patterns) shouldEqual List(1, 4, 11, 15)
+      }
+    }
+  }
 }
