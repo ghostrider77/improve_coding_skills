@@ -33,9 +33,9 @@ class Trie(object):
                 return node
 
     def _is_leaf(self, node):
-        return self._trie.get(node) is None
+        return node not in self._trie
 
-    def does_text_match_with_pattern(self, text, trie):
+    def does_text_match_with_pattern(self, text):
         current_node = self._root
         for letter in text:
             next_node = self._get_neighbour_with_given_label(current_node, letter)
@@ -52,7 +52,7 @@ def multiple_pattern_matching(text, patterns):
     trie = Trie(patterns)
     indices = []
     for ix in range(text_length):
-        if trie.does_text_match_with_pattern(text[ix:], trie):
+        if trie.does_text_match_with_pattern(text[ix:]):
             indices.append(ix)
     return indices
 
