@@ -14,7 +14,7 @@ def calc_BW_transform(string):
             for k in range(length):
                 if double_string[i+k] < double_string[j+k]:
                     return True
-                elif double_string[i+k] > double_string[j+k]:
+                if double_string[i+k] > double_string[j+k]:
                     return False
             return False
 
