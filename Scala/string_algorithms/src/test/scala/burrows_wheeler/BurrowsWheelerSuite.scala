@@ -22,6 +22,28 @@ class BurrowsWheelerSuite extends FreeSpec with Matchers {
     }
   }
 
+  "MatchCompressedString" - {
+    import MatchCompressedString.improvedBWPatternMatching
+
+    "should calculate the number of times each pattern appears in a text given by its Burrows-Wheeler transform" - {
+      "test case 1" in {
+        val transformedString: String = "AGGGAA$"
+        val patterns: List[String] = List("GA")
+        improvedBWPatternMatching(transformedString.toVector, patterns) shouldEqual List(3)
+      }
+      "test case 2" in {
+        val transformedString: String = "ATT$AA"
+        val patterns: List[String] = List("ATA", "A")
+        improvedBWPatternMatching(transformedString.toVector, patterns) shouldEqual List(2, 3)
+      }
+      "test case 3" in {
+        val transformedString: String = "AT$TCTATG"
+        val patterns: List[String] = List("TCT", "TATG")
+        improvedBWPatternMatching(transformedString.toVector, patterns) shouldEqual List(0, 0)
+      }
+    }
+  }
+
   "SuffixArray" - {
     import SuffixArray.calcSuffixArray
 
