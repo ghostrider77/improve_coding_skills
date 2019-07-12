@@ -1,6 +1,3 @@
-type node = int
-type edge_endpoint = { tip : node; label : char }
-
 module IntMap = Map.Make(
     struct
         type t = int
@@ -14,20 +11,20 @@ module Trie : sig
     end = struct
         open Batteries
 
+        type node = int
+        type edge_endpoint = { tip : node; label : char }
         type t = edge_endpoint list IntMap.t
 
         let root = 0
-
-        let node_counter = ref 1
 
         let get_neighbour_with_given_label trie current_node letter =
             Option.map (function { tip } -> tip ) @@
                 Option.bind (IntMap.find_opt current_node trie) (List.find_opt (function { label } -> label = letter ))
 
-        let add_word trie w =
+        let add_word trie w node_counter =
             let rec loop acc current_node = function
                 | [] -> acc
-                | letter :: lss -> match get_neighbour_with_given_label acc current_node letter with
+                | letter :: lss -> match (get_neighbour_with_given_label acc current_node letter) with
                     | None ->
                         let next_node = !node_counter in
                         node_counter := !node_counter + 1;
@@ -40,20 +37,20 @@ module Trie : sig
             in loop trie root (String.to_list w)
 
         let create words =
+            let node_counter = ref 1 in
             let rec loop trie = function
                 | [] -> trie
                 | w :: wss ->
-                    let updated_trie = add_word trie w
+                    let updated_trie = add_word trie w node_counter
                     in loop updated_trie wss
             in loop IntMap.empty words
 
         let to_string_list trie =
+            let to_string node neighbour label =
+                (string_of_int node) ^ "->" ^ (string_of_int neighbour) ^ ":" ^ (Char.escaped label) in
             List.map
                 (function (node, neighbours) ->
-                    List.map
-                        (function { tip = neighbour; label} ->
-                            (string_of_int node) ^ "->" ^ (string_of_int neighbour) ^ ":" ^ (Char.escaped label))
-                                neighbours)
+                    List.map (function { tip = neighbour; label} -> to_string node neighbour label) neighbours)
                 (IntMap.bindings trie) |> List.flatten
     end
 
