@@ -1,4 +1,3 @@
-#python3
 import sys
 from collections import defaultdict, Counter
 from itertools import chain, count
