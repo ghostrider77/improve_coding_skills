@@ -27,4 +27,19 @@ class ChallengesSuite extends FreeSpec with Matchers {
       }
     }
   }
+
+  "ImprovedSuffixArray" - {
+    import ImprovedSuffixArray.calcSuffixArray
+
+    "should calculate the suffix array of a larger string" in {
+      val texts: List[String] = List("AAA$", "GAC$", "GAGAGAGA$", "AACGATAGCGGTAGA$")
+      texts.map(calcSuffixArray) shouldEqual
+        List(
+          List(3, 2, 1, 0),
+          List(3, 1, 2, 0),
+          List(8, 7, 5, 3, 1, 6, 4, 2, 0),
+          List(15, 14, 0, 1, 12, 6, 4, 2, 8, 13, 3, 7, 9, 10, 11, 5)
+        )
+    }
+  }
 }
