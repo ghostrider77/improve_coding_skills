@@ -42,4 +42,28 @@ class ChallengesSuite extends FreeSpec with Matchers {
         )
     }
   }
+
+  "PatternMatchingWithSuffixArray" - {
+    import PatternMatchingWithSuffixArray.{StringSlice, multiplePatternMatching}
+
+    "should return the indices where a pattern appears as substring in text" - {
+      "test case 1" in {
+        val text: String = "AAA"
+        val patterns: List[StringSlice] = List("A").map(p => StringSlice(p, 0, p.length))
+        multiplePatternMatching(text, patterns) shouldEqual Set(0, 1, 2)
+      }
+
+      "test case 2" in {
+        val text: String = "ATA"
+        val patterns: List[StringSlice] = List("C", "G", "C").map(p => StringSlice(p, 0, p.length))
+        multiplePatternMatching(text, patterns) shouldBe empty
+      }
+
+      "test case 3" in {
+        val text: String = "ATATATA"
+        val patterns: List[StringSlice] = List("ATA", "C", "TATAT").map(p => StringSlice(p, 0, p.length))
+        multiplePatternMatching(text, patterns) shouldEqual Set(4, 2, 0, 1)
+      }
+    }
+  }
 }
