@@ -9,7 +9,7 @@ fn read_line() -> String {
 
 fn convert_to_int_vector(line: &str) -> Vec<i32> {
     line.split_whitespace()
-        .map(|x| x.parse::<i32>().unwrap())
+        .map(|x| x.parse().unwrap())
         .collect()
 }
 
