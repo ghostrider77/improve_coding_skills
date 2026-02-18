@@ -2,7 +2,6 @@ use std::io;
 
 const MODULUS: i32 = 10;
 
-
 fn read_int() -> i32 {
     let mut x = String::new();
     io::stdin().read_line(&mut x).unwrap();

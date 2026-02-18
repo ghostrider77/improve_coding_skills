@@ -1,6 +1,5 @@
 use std::io;
 
-
 fn read_line() -> String {
     let mut line = String::new();
     io::stdin().read_line(&mut line).unwrap();
