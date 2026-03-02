@@ -4,7 +4,6 @@ fn read_line() -> String {
     let mut line = String::new();
     io::stdin().read_line(&mut line).unwrap();
     line
-
 }
 
 fn calc_edit_distance(s1: &str, s2: &str) -> i32 {
