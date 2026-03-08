@@ -76,7 +76,7 @@ fn process_packets(network_packets: &[Packet], max_buffer_size: usize, nr_packet
             let next_packet = match buffer.back() {
                 None => BufferedPacket {packet: packet.clone(), finish_time: arrival_time + processing_time},
                 Some(last_packet) =>
-                    BufferedPacket{packet: packet.clone(), finish_time: last_packet.finish_time + processing_time},
+                    BufferedPacket {packet: packet.clone(), finish_time: last_packet.finish_time + processing_time},
             };
             buffer.push_back(next_packet);
         }
