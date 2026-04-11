@@ -152,7 +152,7 @@ fn find_shortest_paths(graph: DirectedGraph, start: i32) -> Vec<String> {
                 }
             };
         result.push(distance_representation);
-        }
+    }
 
     result
 }
