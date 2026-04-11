@@ -1,5 +1,5 @@
 use std::collections::HashMap;
-use std::f64::INFINITY;
+use std::f64;
 use std::io;
 
 #[derive(Clone, Debug, Eq, Hash, PartialEq)]
@@ -52,7 +52,8 @@ fn calc_minimal_spanning_tree(points: Vec<Point>) -> f64 {
     let Some(start_point) = points.iter().next() else {
         return total_cost
     };
-    let mut nodes_with_cost: HashMap<Point, f64> = HashMap::from_iter(points.iter().cloned().map(|p| (p, INFINITY)));
+    let mut nodes_with_cost: HashMap<Point, f64> =
+        HashMap::from_iter(points.iter().cloned().map(|p| (p, f64::INFINITY)));
     nodes_with_cost.insert(start_point.clone(), 0.0);
     loop {
         let Some(v) =
