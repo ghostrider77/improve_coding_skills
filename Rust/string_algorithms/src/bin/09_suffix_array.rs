@@ -33,5 +33,5 @@ fn calc_suffix_array(text: &str) -> Vec<usize> {
 fn main() {
     let text = read_line().trim().to_string();
     let result = calc_suffix_array(&text);
-    println!("{}", result.iter().map(|k| k.to_string()).collect::<Vec<_>>().join(" "))
+    println!("{}", result.iter().map(|k| k.to_string()).collect::<Vec<_>>().join(" "));
 }
