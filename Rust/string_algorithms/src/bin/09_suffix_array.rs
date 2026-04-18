@@ -1,4 +1,3 @@
-use std::cmp::Ordering;
 use std::io;
 
 fn read_line() -> String {
@@ -9,24 +8,10 @@ fn read_line() -> String {
 }
 
 fn calc_suffix_array(text: &str) -> Vec<usize> {
-    let chars = text.chars().collect::<Vec<_>>();
-    let n = chars.len();
-    let mut indices = (0..n).collect::<Vec<_>>();
-    indices.sort_by(|i, j| {
-        let limit = (n - i).min(n - j);
-        for k in 0..limit {
-            if chars[i + k] < chars[j + k] {
-                return Ordering::Less
-            }
+    let bytes = text.as_bytes();
+    let mut indices: Vec<usize> = (0..bytes.len()).collect();
 
-            if chars[i + k] > chars[j + k] {
-                return Ordering::Greater
-            }
-        };
-
-        Ordering::Equal
-    });
-
+    indices.sort_by(|&i, &j| bytes[i..].cmp(&bytes[j..]));
     indices
 }
 
