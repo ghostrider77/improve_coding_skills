@@ -53,11 +53,7 @@ fn read_edges(nr_edges: usize) -> Vec<Edge> {
 fn are_nodes_connected(graph: Graph, u: i32, v: i32) -> bool {
     let mut visited_nodes = HashSet::new();
     let mut stack = vec![u];
-    loop {
-        let Some(node) = stack.pop() else {
-            return false
-        };
-
+    while let Some(node) = stack.pop() {
         if node == v {
             return true
         }
@@ -71,6 +67,8 @@ fn are_nodes_connected(graph: Graph, u: i32, v: i32) -> bool {
             }
         }
     }
+
+    false
 }
 
 fn main() {

@@ -58,10 +58,7 @@ impl DirectedGraph {
         state.previsit_id += 1;
         let mut previsit_stack = vec![start_node];
         let mut current_component = vec![start_node];
-        loop {
-            let Some(last_node) = previsit_stack.pop() else {
-                return current_component
-            };
+        while let Some(last_node) = previsit_stack.pop() {
             let neighbors = self.adjacency_list.get(&last_node);
             match state.find_an_unvisited_neighbour(neighbors) {
                 None => {
@@ -77,6 +74,8 @@ impl DirectedGraph {
                 }
             };
         }
+
+        current_component
     }
 
     fn run_dfs(&self) -> (Vec<Component>, DFSState) {

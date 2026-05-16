@@ -87,10 +87,7 @@ fn create_initial_heap(initial_jobs: &[i32]) -> BinaryHeap<Reverse<ProcessedJob>
 }
 
 fn remove_remaining_elements(heap: &mut BinaryHeap<Reverse<ProcessedJob>>, processed_jobs: &mut [JobSchedule]) {
-    loop {
-        let Some(Reverse(ProcessedJob {thread_id, job_id, process_time, finish_time})) = heap.pop() else {
-            return
-        };
+    while let Some(Reverse(ProcessedJob {thread_id, job_id, process_time, finish_time})) = heap.pop() {
         processed_jobs[job_id] = JobSchedule {thread_id, process_start_time: finish_time - process_time};
     }
 }

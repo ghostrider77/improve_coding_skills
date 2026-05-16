@@ -123,10 +123,7 @@ fn bellman_ford(graph: &DirectedGraph, start_node: i32) -> (Vec<Distance>, HashS
 fn find_nodes_reachable_from_relaxed_nodes(graph: &DirectedGraph, relaxed_nodes: HashSet<i32>) -> HashSet<i32> {
     let mut visited_nodes = relaxed_nodes.clone();
     let mut queue = VecDeque::from_iter(relaxed_nodes);
-    loop {
-        let Some(node) = queue.pop_front() else {
-            return visited_nodes
-        };
+    while let Some(node) = queue.pop_front() {
         if let Some(neighbors) = graph.adjacency_list.get(&node) {
             for &Edge {to, ..} in neighbors {
                 if !visited_nodes.contains(&to) {
@@ -136,6 +133,8 @@ fn find_nodes_reachable_from_relaxed_nodes(graph: &DirectedGraph, relaxed_nodes:
             }
         }
     }
+
+    visited_nodes
 }
 
 fn find_shortest_paths(graph: DirectedGraph, start: i32) -> Vec<String> {

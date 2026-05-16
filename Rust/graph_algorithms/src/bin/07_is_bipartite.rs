@@ -70,10 +70,7 @@ fn get_consistently_colored_component(graph: &Graph, start_node: i32) -> Option<
     let mut coloring = HashMap::from([(start_node, NodeColor::Red)]);
     let mut component = HashSet::from([start_node]);
     let mut queue = VecDeque::from([start_node]);
-    loop {
-        let Some(node) = queue.pop_front() else {
-            return Some(component)
-        };
+    while let Some(node) = queue.pop_front() {
         let node_color = coloring.get(&node).unwrap().clone();
         if let Some(neighbors) = graph.adjacency_list.get(&node) {
             for &neighbor in neighbors {
@@ -89,19 +86,20 @@ fn get_consistently_colored_component(graph: &Graph, start_node: i32) -> Option<
             }
         }
     }
+
+    Some(component)
 }
 
 fn is_bipartite(graph: &Graph) -> bool {
     let mut unvisited_nodes = (1..=graph.nr_nodes).collect::<HashSet<_>>();
-    loop {
-        let Some(start_node) = unvisited_nodes.iter().next().cloned() else {
-            return true;
-        };
+    while let Some(start_node) = unvisited_nodes.iter().next().cloned() {
         let Some(bipartite_component) = get_consistently_colored_component(graph, start_node) else {
             return false;
         };
         unvisited_nodes.retain(|x| !bipartite_component.contains(x));
     }
+
+    true
 }
 
 fn main() {

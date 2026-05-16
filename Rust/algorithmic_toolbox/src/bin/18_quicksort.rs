@@ -41,10 +41,7 @@ fn quicksort(xs: &mut [i32], n: usize) -> () {
     let mut rng = StdRng::seed_from_u64(2112);
     let mut stack: Vec<(usize, usize)> = Vec::new();
     stack.push((0, n - 1));
-    loop {
-        let Some((left_end, right_end)) = stack.pop() else {
-            return;
-        };
+    while let Some((left_end, right_end)) = stack.pop() {
         if left_end < right_end {
             let ix = rng.random_range(left_end..=right_end);
             let pivot = xs[ix];

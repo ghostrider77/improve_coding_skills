@@ -62,10 +62,7 @@ impl Graph {
         state.previsit_id += 1;
         let mut previsit_stack = vec![start_node];
         let mut current_component = vec![start_node];
-        loop {
-            let Some(last_node) = previsit_stack.pop() else {
-                return current_component
-            };
+        while let Some(last_node) = previsit_stack.pop() {
             match self.find_unvisited_neighbour_of_a_node(state, last_node) {
                 None => {
                     state.postvisit_numbers[last_node as usize - 1] = state.postvisit_id;
@@ -80,6 +77,8 @@ impl Graph {
                 }
             };
         }
+
+        current_component
     }
 
     fn connected_components(&self) -> Vec<Component> {

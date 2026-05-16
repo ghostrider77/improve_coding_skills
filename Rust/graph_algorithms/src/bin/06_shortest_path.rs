@@ -56,10 +56,7 @@ fn find_shortest_paths(graph: Graph, start_node: i32, target_node: i32) -> i32 {
     distances[start_node as usize - 1] = 0;
     let mut queue = VecDeque::new();
     queue.push_back(start_node);
-    loop {
-        let Some(node) = queue.pop_front() else {
-            return distances[target_node as usize - 1]
-        };
+    while let Some(node) = queue.pop_front() {
         if let Some(neighbors) = graph.adjacency_list.get(&node) {
             for &neighbor in neighbors {
                 if distances[neighbor as usize - 1] == -1 {
@@ -69,6 +66,8 @@ fn find_shortest_paths(graph: Graph, start_node: i32, target_node: i32) -> i32 {
             }
         }
     }
+
+    distances[target_node as usize - 1]
 }
 
 fn main() {

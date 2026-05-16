@@ -99,10 +99,7 @@ fn find_cheapest_path(graph: DirectedGraph, start: i32, end: i32) -> Distance {
     distances[start as usize - 1] = Distance::Dist(0);
     let mut heap = BinaryHeap::from([Reverse((Distance::Dist(0), start))]);
     let mut finalized_nodes = HashSet::new();
-    loop {
-        let Some(Reverse((dist, node))) = heap.pop() else {
-            return distances[end as usize - 1]
-        };
+    while let Some(Reverse((dist, node))) = heap.pop() {
         if !finalized_nodes.contains(&node) {
             if let Some(neighbors) = graph.adjacency_list.get(&node) {
                 for &Edge {to, weight, ..} in neighbors {
@@ -116,6 +113,8 @@ fn find_cheapest_path(graph: DirectedGraph, start: i32, end: i32) -> Distance {
             };
         };
     };
+
+    distances[end as usize - 1]
 }
 
 fn main() {

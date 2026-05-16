@@ -59,10 +59,7 @@ impl BinaryTree {
         let mut stack2 = Vec::new();
         let mut node_ix = self.root_ix;
         stack1.push(node_ix);
-        loop {
-            let Some(ix) = stack1.pop() else {
-                break
-            };
+        while let Some(ix) = stack1.pop() {
             node_ix = ix;
             if node_ix != -1 {
                 stack2.push(node_ix);
@@ -73,14 +70,13 @@ impl BinaryTree {
         }
 
         let mut keys = Vec::new();
-        loop {
-            let Some(ix) = stack2.pop() else {
-                return keys
-            };
+        while let Some(ix) = stack2.pop() {
             node_ix = ix;
             let node = &self.nodes[node_ix as usize];
             keys.push(node.key);
         }
+
+        keys
     }
 }
 

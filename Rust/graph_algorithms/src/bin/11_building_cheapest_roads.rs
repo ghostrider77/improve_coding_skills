@@ -55,11 +55,8 @@ fn calc_minimal_spanning_tree(points: Vec<Point>) -> f64 {
     let mut nodes_with_cost: HashMap<Point, f64> =
         HashMap::from_iter(points.iter().cloned().map(|p| (p, f64::INFINITY)));
     nodes_with_cost.insert(start_point.clone(), 0.0);
-    loop {
-        let Some(v) =
-                nodes_with_cost.iter().min_by(|(_, a), (_, b)| a.partial_cmp(b).unwrap()).map(|(k, _)| k.clone()) else {
-            return total_cost
-        };
+    while let Some(v) =
+        nodes_with_cost.iter().min_by(|(_, a), (_, b)| a.partial_cmp(b).unwrap()).map(|(k, _)| k.clone()) {
         let (_, cost_of_adding_v) = nodes_with_cost.remove_entry(&v).unwrap();
         total_cost += cost_of_adding_v;
         for (z, cost_of_adding_z) in nodes_with_cost.iter_mut() {
@@ -69,6 +66,8 @@ fn calc_minimal_spanning_tree(points: Vec<Point>) -> f64 {
             }
         }
     }
+
+    total_cost
 }
 
 fn main() {
